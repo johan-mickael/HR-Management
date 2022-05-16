@@ -53,7 +53,7 @@ class Employee
     #[ORM\Column(type: 'string', length: 50)]
     private $employee_status;
 
-    #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'employees')]
+    #[ORM\ManyToMany(targetEntity: Role::class)]
     private $role;
 
     #[ORM\OneToOne(targetEntity: EmployeeCategory::class, cascade: ['persist', 'remove'])]

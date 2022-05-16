@@ -36,12 +36,6 @@ class Planning
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $textColor;
 
-
-    public function __construct()
-    {
-        $this->attendees = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -153,27 +147,4 @@ class Planning
         return $this;
     }
 
-    /**
-     * @return Collection<int, Employee>
-     */
-    public function getAttendees(): Collection
-    {
-        return $this->attendees;
-    }
-
-    public function addAttendee(Employee $attendee): self
-    {
-        if (!$this->attendees->contains($attendee)) {
-            $this->attendees[] = $attendee;
-        }
-
-        return $this;
-    }
-
-    public function removeAttendee(Employee $attendee): self
-    {
-        $this->attendees->removeElement($attendee);
-
-        return $this;
-    }
 }

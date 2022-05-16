@@ -21,16 +21,13 @@ class Role
     #[ORM\Column(type: 'string', length: 50)]
     private $role_name;
 
-    #[ORM\ManyToMany(targetEntity: Employee::class, mappedBy: 'role')]
-    private $employees;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'role')]
-    private $users;
+    // #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'role')]
+    // private $users;
 
     public function __construct()
     {
-        $this->employee = new ArrayCollection();
-        $this->users = new ArrayCollection();
+        // $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,61 +59,35 @@ class Role
         return $this;
     }
 
-    /**
-     * @return Collection<int, Employee>
-     */
-    public function getEmployees(): Collection
-    {
-        return $this->employee;
-    }
-
-    public function addEmployees(Employee $employee): self
-    {
-        if (!$this->employees->contains($employee)) {
-            $this->employees[] = $employee;
-            $employee->addRole($this);
-        }
-
-        return $this;
-    }
-
-    public function removeEmployees(Employee $employee): self
-    {
-        if ($this->employees->removeElement($employee)) {
-            $employee->removeRole($this);
-        }
-
-        return $this;
-    }
     public function getAllRoles(): string
     {
         return $this->getName();
     }
 
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
+    // /**
+    //  * @return Collection<int, User>
+    //  */
+    // public function getUsers(): Collection
+    // {
+    //     return $this->users;
+    // }
 
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addRole($this);
-        }
+    // public function addUser(User $user): self
+    // {
+    //     if (!$this->users->contains($user)) {
+    //         $this->users[] = $user;
+    //         $user->addRole($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeRole($this);
-        }
+    // public function removeUser(User $user): self
+    // {
+    //     if ($this->users->removeElement($user)) {
+    //         $user->removeRole($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

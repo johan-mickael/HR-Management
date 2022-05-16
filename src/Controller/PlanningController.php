@@ -92,8 +92,8 @@ class PlanningController extends AbstractController
     public function getJson(PlanningRepository $planningRepository): JsonResponse
     {
         // Getting all plannings stored in the database
-        // $planning = $planningRepository->findAll();
-        $planning = $this->user->getPlannings();
+        $planning = $planningRepository->findAll();
+        // $planning = $this->user->getPlannings();
 
         // Serializing the data and send it as a Json response
         return new JsonResponse($this->serializer->serialize($planning, 'json'));

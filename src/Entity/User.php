@@ -21,9 +21,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 180, unique: true)]
     private $email;
 
-    #[ORM\Column(type: 'json')]
-    private $roles = [];
-
     #[ORM\Column(type: 'string')]
     private $password;
 
@@ -33,13 +30,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Role::class, inversedBy: 'users')]
     private $role;
 
-    #[ORM\ManyToMany(targetEntity: Planning::class, mappedBy: 'attendees')]
-    private $plannings;
-
     public function __construct()
     {
         $this->role = new ArrayCollection();
-        $this->plannings = new ArrayCollection();
     }
 
 
@@ -149,31 +142,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Planning>
-     */
-    public function getPlannings(): Collection
-    {
-        return $this->plannings;
-    }
-
-    public function addPlanning(Planning $planning): self
-    {
-        if (!$this->plannings->contains($planning)) {
-            $this->plannings[] = $planning;
-            $planning->addAttendee($this);
-        }
-
-        return $this;
-    }
-
-    public function removePlanning(Planning $planning): self
-    {
-        if ($this->plannings->removeElement($planning)) {
-            $planning->removeAttendee($this);
-        }
-
-        return $this;
-    }
+    
 }
