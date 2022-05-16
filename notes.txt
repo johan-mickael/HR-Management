@@ -1,0 +1,36 @@
+Dashboard - Johan
+- Nombre employee
+- Nbr taches
+- Nbr clients
+- Graphe taches CA / mois
+
+Salaire - Gelvy
+- Calcul salaire
+- Bulletin de salaire mensuel
+
+Taches -Ingrid
+- Ajout bouttons Ajouter Item
+- CRUD Item : show / edit de taches
+- Progresbar de la tache en fonction des items
+
+Comptabilté - Arthur
+- Vue de la caisse
+- Sortie de caisse CRUD
+    name, dscription, montant
+- Rapport de caisse
+
+Utilisateurs - Emilie
+- Creation d utilisateur apres creation employé 
+- Envoi de ses identifiants par mail a chaque creation d utilisateur
+- gestion du profil utilisateur
+
+Reglages - Gelvy
+- Informations de la companie CRUD
+
+Frontend - Arthur
+- Mises a jour des titres de pages
+- Alignements des boutons
+- Grammaire / Orthographe
+- Gerer les boutons delete
+
+

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tasks index{% endblock %}
+{% block header %}Liste des tâches{% endblock %}
+{% block styles %}
+{# Datatables styles #}
+{% include "datatable/styles.html.twig" %}
+{% endblock %}
+{% block body %}
+<div class="card card-outline">
+    <!-- /.card-header -->
+    <div class="card-header">
+        <a class="btn btn-success" href="{{ path('app_tasks_new') }}">
+            <i class="fas fa-plus-circle"></i>
+            Nouvelle entrée</a>
+    </div>
+    <div class="card-body">
+        <table id="datatable" class="table table-bordered table-striped card-secondary card-outline table-hover">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Start_date</th>
+                    <th>End_date</th>
+                    <th>Status</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.price }}</td>
+                    <td>{{ task.startDate ? task.startDate|date('Y-m-d') : '' }}</td>
+                    <td>{{ task.endDate ? task.endDate|date('Y-m-d') : '' }}</td>
+                    <td>{{ task.status }}</td>
+                    <td>
+                        <a href="{{ path('app_tasks_show', {'id': task.id}) }}">show</a>
+                        <a href="{{ path('app_tasks_edit', {'id': task.id}) }}">edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+{# Datatables scripts #}
+{{ include('datatable/scripts.html.twig') }}
+{% endblock %}

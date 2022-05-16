@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customers index{% endblock %}
+{% block styles %}
+{# Datatables styles #}
+{% include "datatable/styles.html.twig" %}
+{% endblock %}
+{% block header %}
+Liste des clients
+{% endblock %}
+{% block body %}
+<div class="card card-outline">
+    <!-- /.card-header -->
+    <div class="card-header">
+		<a class="btn btn-success" href="{{ path('app_customers_new') }}">
+			<i class="fas fa-plus-circle"></i>
+			Nouvelle entrée</a>
+	</div>
+    <div class="card-body">
+        <table id="datatable" class="table table-bordered table-striped card-secondary card-outline table-hover">
+            <thead>
+                <tr>
+                    <th>Company_name</th>
+                    <th>Customer_name</th>
+                    <th>Customer_surname</th>
+                    <th>Customer_email</th>
+                    <th>Customer_phone_number</th>
+                    <th>Customer_adress</th>
+                    <th>Customer_code</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.companyName }}</td>
+                    <td>{{ customer.customerName }}</td>
+                    <td>{{ customer.customerSurname }}</td>
+                    <td>{{ customer.customerEmail }}</td>
+                    <td>{{ customer.customerPhoneNumber }}</td>
+                    <td>{{ customer.customerAdress }}</td>
+                    <td>{{ customer.customerCode }}</td>
+                    <td>
+                        <a href="{{ path('app_customers_show', {'id': customer.id}) }}">show</a>
+                        <a href="{{ path('app_customers_edit', {'id': customer.id}) }}">edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block scripts %}
+{# Datatables scripts #}
+{{ include('datatable/scripts.html.twig') }}
+{% endblock %}

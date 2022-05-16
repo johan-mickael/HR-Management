@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Departments index{% endblock %}
+{% block header %}Départements{% endblock %}
+
+{% block styles %}
+{# Datatables styles #}
+{% include "datatable/styles.html.twig" %}
+{% endblock %}
+
+{% block body %}
+<div class="card card-outline">
+    <!-- /.card-header -->
+    <div class="card-header">
+        <a class="btn btn-success" href="{{ path('app_departments_new') }}">
+            <i class="fas fa-plus-circle"></i>
+            Nouvelle entrée</a>
+    </div>
+    <div class="card-body">
+        <table id="datatable" class="table table-bordered table-striped card-secondary card-outline table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Department_name</th>
+                    <th>Department_desc</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for department in departments %}
+                <tr>
+                    <td>{{ department.id }}</td>
+                    <td>{{ department.departmentName }}</td>
+                    <td>{{ department.departmentDesc }}</td>
+                    <td>
+                        <a href="{{ path('app_departments_show', {'id': department.id}) }}">show</a>
+                        <a href="{{ path('app_departments_edit', {'id': department.id}) }}">edit</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4">no records found</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+{# Datatables scripts #}
+{{ include('datatable/scripts.html.twig') }}
+{% endblock %}

@@ -1,0 +1,50 @@
+.show-btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
+}
+
+.delete-btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: 0;
+}
+
+.edit-btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-left: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  margin-right: 0;
+}
+
+.display-contents {
+  display: contents;
+}
+
+.add-btn {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 0.5rem;
+}
+
+hr {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+#header-title {
+  font-family: system-ui, sans-serif;
+}
+
+.preloader {
+  background-color: #1c1c1c;
+  color: white;
+}
+
+.item-show {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}

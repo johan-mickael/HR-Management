@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employé(e)s
+{% endblock %}
+{% block styles %}
+{# Datatables styles #}
+{% include "datatable/styles.html.twig" %}
+{% endblock %}
+{% block header %}
+Liste des employés
+{% endblock %}
+{% block body %}
+<div class="card card-outline">
+	<div class="card-header">
+		<a class="btn btn-success" href="{{ path('app_employee_new') }}">
+			<i class="fas fa-plus-circle"></i>
+			Nouvelle entrée</a>
+	</div>
+	<!-- /.card-header -->
+	<div class="card-body">
+		<table id="datatable" class="table table-bordered table-striped card-secondary card-outline table-hover">
+			<thead>
+				<tr>
+					<th>Employee_photo</th>
+					<th>Employee_code</th>
+					<th>Employee_name</th>
+					<th>Employee_surname</th>
+					<th>Employee_sexe</th>
+					<th>Employee_email</th>
+					<th>Employee_status</th>
+					<th>actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for employee in employees %}
+				<tr>
+					<td>
+						<div class="image">
+							<img src="{{asset('uploads/employees/avatars/'~employee.employeePhoto)}}" class="img-circle"
+								alt="avatar" height="40px" width="40px">
+
+						</div>
+					</td>
+					<td>{{ employee.employeeCode }}</td>
+					<td>{{ employee.employeeName }}</td>
+					<td>{{ employee.employeeSurname }}</td>
+					<td>{{ employee.employeeSexe }}</td>
+					<td>{{ employee.employeeEmail }}</td>
+					<td>{{ employee.employeeStatus }}</td>
+					<td>
+						<a href="{{ path('app_employee_show', {'id': employee.id}) }}">show</a>
+						<a href="{{ path('app_employee_edit', {'id': employee.id}) }}">edit</a>
+					</td>
+				</tr>
+				{% else %}
+				<tr>
+					<td colspan="8">no records found</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+
+	</div><!-- /.card-body -->
+</div>
+<!-- /.card -->
+{% endblock %}
+{% block scripts %}
+{# Datatables scripts #}
+{{ include('datatable/scripts.html.twig') }}
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee Category
+{% endblock %}
+{% block header %}
+	Détails de la catégorie
+{% endblock %}
+{% block body %}
+	<a class="mb-5" href="{{ path('employee_category_index') }}">
+		<button class="btn btn-sm btn-outline-primary">
+			<i class="fas fa-arrow-left"></i>
+			Retour à la liste</button>
+	</a>
+	<div class="card mt-2" style="width: 18rem;">
+		<ul class="list-group list-group-flush">
+			<li class="list-group-item item-show" >
+				Nom
+				<span class="badge bg-primary">{{ employee_category.name | upper}}</span>
+			</li>
+		</b>
+		<li class="list-group-item item-show" >Salaire
+			<span class="badge bg-primary">{{ employee_category.baseSalary | unit('€') }}</span>
+		</li>
+	</b>
+	<li class="list-group-item item-show" >Heure de travail
+		<span class="badge bg-primary">{{ employee_category.defaultHour | unit('h') }}</span>
+	</li>
+</b></ul></div><a href="{{ path('employee_category_edit', {'id': employee_category.id}) }}"><button class="btn btn-secondary text-white btn-sm">
+<i class="far fa-edit"></i>
+Modifier</button></a>{{ include('employee_category/_delete_form.html.twig') }}{% endblock %}
+
+{% block scripts %}
+<script src="{{asset('js/delete-confirm.js')}} "></script>
+{% endblock %}

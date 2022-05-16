@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Employee
+{% endblock %}
+{% block header %}Employé{% endblock %}
+{% block body %}
+
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Employee_photo</th>
+				<td>
+					<div class="image">
+						<img src="{{asset('uploads/employees/avatars/'~employee.employeePhoto)}}" class="img-circle" alt="avatar" height="40px" width="40px">
+
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>Employee_code</th>
+				<td>{{ employee.employeeCode }}</td>
+			</tr>
+			<tr>
+				<th>Employee_name</th>
+				<td>{{ employee.employeeName }}</td>
+			</tr>
+			<tr>
+				<th>Employee_surname</th>
+				<td>{{ employee.employeeSurname }}</td>
+			</tr>
+			<tr>
+				<th>Employee_sexe</th>
+				<td>{{ employee.employeeSexe }}</td>
+			</tr>
+			<tr>
+				<th>Employee_dob</th>
+				<td>{{ employee.employeeDob ? employee.employeeDob|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Employee_email</th>
+				<td>{{ employee.employeeEmail }}</td>
+			</tr>
+
+			<tr>
+				<th>Employee_phone</th>
+				<td>{{ employee.employeePhone }}</td>
+			</tr>
+			<tr>
+				<th>Hire_date</th>
+				<td>{{ employee.hireDate ? employee.hireDate|date('Y-m-d') : '' }}</td>
+			</tr>
+			<tr>
+				<th>Employee_adress</th>
+				<td>{{ employee.employeeAdress }}</td>
+			</tr>
+			<tr>
+				<th>Employee_status</th>
+				<td>{{ employee.employeeStatus }}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_employee_index') }}">back to list</a>
+
+	<a href="{{ path('app_employee_edit', {'id': employee.id}) }}">edit</a>
+
+	{{ include('employee/_delete_form.html.twig') }}
+{% endblock %}
