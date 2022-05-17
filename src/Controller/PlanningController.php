@@ -49,7 +49,7 @@ class PlanningController extends AbstractController
     }
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {
         // Creating the instance of the planning (event dropped)
         $planning = new Planning();
@@ -65,11 +65,11 @@ class PlanningController extends AbstractController
         $entityManager->flush();
 
         // Sending a 202 response with a message
-        return new JsonResponse($this->serializer->serialize($planning, 'json'));
+        return new JsonResponse($serializer->serialize($planning, 'json', ['groups' => ['calendar']]));
     }
 
     #[Route('/edit', name: 'edit')]
-    public function edit(Request $request, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, EntityManagerInterface $entityManager, SerializerInterface $serializer): Response
     {
         // Find the current event planning into the database to edit it later
         $planning = $entityManager->getRepository(Planning::class)->find($request->request->get('id'));
@@ -84,16 +84,16 @@ class PlanningController extends AbstractController
         $entityManager->flush();
 
         // Sending a 202 response with a message
-        return new JsonResponse($this->serializer->serialize($planning, 'json'));
+        return new JsonResponse($serializer->serialize($planning, 'json', ['groups' => ['calendar']]));
     }
 
     #[Route('/json', name: 'data')]
-    public function getJson(PlanningRepository $planningRepository, SerializerInterface $serializers): JsonResponse
+    public function getJson(PlanningRepository $planningRepository, SerializerInterface $serializer): JsonResponse
     {
         // Getting all plannings stored in the database
         $planning = $planningRepository->findAll();
         // Serializing the data and send it as a Json response
-        return new JsonResponse($serializers->serialize($planning, 'json', ['groups' => ['calendar']]));
+        return new JsonResponse($serializer->serialize($planning, 'json', ['groups' => ['calendar']]));
     }
 
 
