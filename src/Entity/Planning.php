@@ -7,6 +7,8 @@ use DateInterval;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 use function PHPUnit\Framework\isNull;
 
@@ -16,25 +18,41 @@ class Planning
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    #[Groups('calendar')]
     private $id;
 
     #[ORM\Column(type: 'datetime')]
+    #[Groups('calendar')]
     private $start;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
+    #[Groups('calendar')]
     private $end;
 
     #[ORM\Column(type: 'string', length: 100)]
+    #[Groups('calendar')]
     private $title;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('calendar')]
     private $color;
 
     #[ORM\Column(type: 'boolean')]
+    #[Groups('calendar')]
     private $allDay;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[Groups('calendar')]
     private $textColor;
+
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'plannings')]
+    #[Groups('calendar')]
+    private $attendees;
+
+    public function __construct()
+    {
+        $this->attendees = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -143,6 +161,30 @@ class Planning
     public function setTextColor(?string $textColor): self
     {
         $this->textColor = $textColor;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getAttendees(): Collection
+    {
+        return $this->attendees;
+    }
+
+    public function addAttendee(User $attendee): self
+    {
+        if (!$this->attendees->contains($attendee)) {
+            $this->attendees[] = $attendee;
+        }
+
+        return $this;
+    }
+
+    public function removeAttendee(User $attendee): self
+    {
+        $this->attendees->removeElement($attendee);
 
         return $this;
     }

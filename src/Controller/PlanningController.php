@@ -20,8 +20,7 @@ use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
-
-
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route('/plannings', name: 'planning_')]
 class PlanningController extends AbstractController
@@ -89,15 +88,14 @@ class PlanningController extends AbstractController
     }
 
     #[Route('/json', name: 'data')]
-    public function getJson(PlanningRepository $planningRepository): JsonResponse
+    public function getJson(PlanningRepository $planningRepository, SerializerInterface $serializers): JsonResponse
     {
         // Getting all plannings stored in the database
         $planning = $planningRepository->findAll();
-        // $planning = $this->user->getPlannings();
-
         // Serializing the data and send it as a Json response
-        return new JsonResponse($this->serializer->serialize($planning, 'json'));
+        return new JsonResponse($serializers->serialize($planning, 'json', ['groups' => ['calendar']]));
     }
+
 
     #[Route('/delete', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, EntityManagerInterface $entityManager): Response
