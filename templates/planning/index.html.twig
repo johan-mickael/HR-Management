@@ -103,16 +103,18 @@ Calendrier et plannings de l'entreprise
 <script type="text/javascript" src="{{ asset('js/planning/calendarAjax.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/planning/calendarOptions.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/planning/calendar.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/planning/share.js') }}"></script>
+
 <!-- Page specific script -->
 <script src="{{asset('plugins/summernote/summernote-bs4.min.js')}}"></script>
+
 <!-- Select2 -->
 <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
-<script>
-	$(function () { // Add text editor
-		$('#compose-textarea').summernote();
-		// Initialize Select2 Elements
-		$('.select2').select2();
 
+<script>
+	$(function () {
+		// Initialize Select2 Elements
+		$('.share-with').select2();
 	})
 </script>
 {% endblock %}

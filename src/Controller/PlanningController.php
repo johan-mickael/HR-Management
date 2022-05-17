@@ -104,6 +104,16 @@ class PlanningController extends AbstractController
         return new JsonResponse($serializer->serialize($planning, 'json', ['groups' => ['calendar']]));
     }
 
+    #[Route('/users/json', name: 'data_')]
+    public function getAllUsers(UserRepository $userRepository, SerializerInterface $serializer): JsonResponse
+    {
+        // Getting all plannings stored in the database
+        $users = $userRepository->findAll();
+
+        // Serializing the data and send it as a Json response
+        return new JsonResponse($serializer->serialize($users, 'json', ['groups' => ['calendar']]));
+    }
+
 
     #[Route('/delete', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, EntityManagerInterface $entityManager): Response
@@ -113,5 +123,20 @@ class PlanningController extends AbstractController
         $entityManager->flush();
 
         return new Response('Supprimé');
+    }
+
+    // Routes
+    #[Route('/share', name: 'share', methods: ['POST'])]
+    public function share(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
+    {
+        $planning = $entityManager->getRepository(Planning::class)->find($request->request->get('planningId'));
+        $usersID = $request->request->all('users');
+        foreach($usersID as $userID) {
+            $user = $userRepository->find($userID);
+            $planning->addAttendee($user);
+        }
+        $entityManager->flush();
+
+        return $this->redirectToRoute('planning_index');
     }
 }

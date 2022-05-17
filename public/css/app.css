@@ -48,3 +48,10 @@ hr {
   justify-content: space-between;
   align-items: baseline;
 }
+
+.select2-container--default
+  .select2-selection--multiple
+  .select2-selection__choice {
+  background-color: #7400ff;
+  border: 1px solid #fff;
+}

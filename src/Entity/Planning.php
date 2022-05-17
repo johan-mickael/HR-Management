@@ -185,7 +185,6 @@ class Planning
     public function removeAttendee(User $attendee): self
     {
         $this->attendees->removeElement($attendee);
-
         return $this;
     }
 

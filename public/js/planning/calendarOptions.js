@@ -2,7 +2,7 @@
  * Author: Johan Mickaël
  * Description: We specify here all options needed for the calendar
  */
-
+var plannings = []
 var newEvents = []
 var calendarEl = document.getElementById('calendar');
 const calendar = new FullCalendar.Calendar(calendarEl, {
@@ -30,7 +30,8 @@ const calendar = new FullCalendar.Calendar(calendarEl, {
         {
             url: '/plannings/json',
             success: (data) => {
-                return JSON.parse(data)
+                plannings = JSON.parse(data)
+                return plannings
             },
             method: 'POST',
             failure: (err) => {
