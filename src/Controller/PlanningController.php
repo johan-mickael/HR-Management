@@ -8,7 +8,9 @@
 namespace App\Controller;
 
 use App\Entity\Planning;
+use App\Repository\EmployeeRepository;
 use App\Repository\PlanningRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,6 +34,7 @@ class PlanningController extends AbstractController
     {
         // We are using JSON encoder here to serialize our planning object to a JSON format
         $encoders = [new JsonEncoder()];
+
         // The object and the  normalizer to normalize our planning object as an array
         $normalizers = [new DateTimeNormalizer(), new ObjectNormalizer()];
 
@@ -43,9 +46,11 @@ class PlanningController extends AbstractController
     }
 
     #[Route('/', name: 'index')]
-    public function index(): Response
+    public function index(UserRepository $userRepository): Response
     {
-        return $this->render('planning/index.html.twig');
+        return $this->render('planning/index.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
     }
 
     #[Route('/new', name: 'new')]
@@ -59,6 +64,7 @@ class PlanningController extends AbstractController
         $planning->setColor($request->request->get('color'));
         $planning->setAllDay($request->request->get('allDay'));
         $planning->setTextColor($request->request->get('textColor'));
+        $planning->addAttendee($this->user);
 
         // Saving the planning into the database
         $entityManager->persist($planning);
@@ -79,6 +85,7 @@ class PlanningController extends AbstractController
         $planning->setColor($request->request->get('color'));
         $planning->setAllDay($request->request->get('allDay'));
         $planning->setTextColor($request->request->get('textColor'));
+        $planning->addAttendee($this->user);
 
         // // Saving the planning into the database
         $entityManager->flush();
@@ -91,7 +98,8 @@ class PlanningController extends AbstractController
     public function getJson(PlanningRepository $planningRepository, SerializerInterface $serializer): JsonResponse
     {
         // Getting all plannings stored in the database
-        $planning = $planningRepository->findAll();
+        $planning = $this->user->getPlannings();
+
         // Serializing the data and send it as a Json response
         return new JsonResponse($serializer->serialize($planning, 'json', ['groups' => ['calendar']]));
     }

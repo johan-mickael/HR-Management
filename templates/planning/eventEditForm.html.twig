@@ -1,7 +1,6 @@
 <div id="cardEventEdit" class="card">
 	<div class="card-header">
-		<h5 class="card-title text-secondary"><i class="fa fa-edit"></i>Modifier</h5>
-
+		<h5 class=" text-secondary"><i class="fa fa-edit"></i>Modifier</h5>
 	</div>
 	<div class="card-body">
 		<input id="eventTitleInput" class="form-control form-control-sm mb-2" name="title" type="text"
@@ -22,8 +21,17 @@
 
 		<input id="eventAllDayInput" name="allDay" type="hidden" />
 		<input id="eventIdInput" name="id" type="hidden" />
-		<button id="editEventBtn" type="button" class="btn btn-secondary btn-sm">Valider</button>
-		<button id="removeEventBtn" type="button" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
-
+		<hr>
+		<div class="" style="display: flex; justify-content: space-between;">
+			<button id="editEventBtn" type="button" class="btn btn-success btn-sm"><i
+					class="fas fa-check mr-1"></i>Sauvegarder</button>
+			<div>
+				<button id="removeEventBtn" type="button" class="btn btn-danger btn-sm"><i
+						class="fas fa-trash"></i></button>
+				<button id="removeEventBtn" type="button" data-toggle="modal" data-target="#modal-default"
+					class="btn btn-secondary btn-sm"><i class="fas fa-share"></i></button>
+			</div>
+		</div>
+		
 	</div>
 </div>
