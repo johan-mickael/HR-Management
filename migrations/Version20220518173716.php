@@ -20,7 +20,7 @@ final class Version20220518173716 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql("create or replace view v_dashboard as select (select count(*) FROM employees) nb_employee, (select count(*) FROM departments) nb_department, (select count(*) from customers) nb_customer, (select avg(base_salary) from employee_category) salary_avg;");
+        $this->addSql("create or replace view v_dashboard as select (select 0) id, (select count(*) FROM employees) nb_employee, (select count(*) FROM departments) nb_department, (select count(*) from customers) nb_customer, (select avg(base_salary) from employee_category) salary_avg");
     }
 
     public function down(Schema $schema): void

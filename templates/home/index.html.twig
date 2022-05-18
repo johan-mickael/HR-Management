@@ -3,7 +3,7 @@
 {% block title %}Dashboard
 {% endblock %}
 {% block header %}
-Dashboard
+Tableau de bord
 {% endblock %}
 {% block body %}
 <div class="row">
@@ -12,7 +12,7 @@ Dashboard
 		<div class="small-box bg-info">
 			<div class="inner">
 				<h3>{{dashboard.nbEmployee}}</h3>
-				<p>Employés</p>
+				<p>Employés enregistrés</p>
 			</div>
 			<div class="icon">
 				<i class="ion ion-bag"></i>
@@ -26,7 +26,7 @@ Dashboard
 		<div class="small-box bg-warning">
 			<div class="inner">
 				<h3>€{{dashboard.salaryAvg | number_format(2, ',', '.')}}</h3>
-				<p>Salaire moyen</p>
+				<p>Salaire en moyenne</p>
 			</div>
 			<div class="icon">
 				<i class="ion ion-pie-graph"></i>
@@ -41,7 +41,7 @@ Dashboard
 		<div class="small-box bg-success">
 			<div class="inner">
 				<h3>{{dashboard.nbDepartment}}</h3>
-				<p>Départements</p>
+				<p>Départements dans l'entreprise</p>
 			</div>
 			<div class="icon">
 				<i class="ion ion-stats-bars"></i>
@@ -56,7 +56,7 @@ Dashboard
 		<div class="small-box bg-danger">
 			<div class="inner">
 				<h3>{{dashboard.nbCustomer}}</h3>
-				<p>Clients</p>
+				<p>Clients enregistrés</p>
 			</div>
 			<div class="icon">
 				<i class="ion ion-person-add"></i>
