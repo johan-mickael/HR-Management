@@ -19,6 +19,7 @@ async function addEvent(dropInfo) {
             // Setting the id for the new event dropped
             json = await JSON.parse(json)
             event.setProp('id', json.id)
+            plannings.push(event)
             Toast.fire({
                 icon: 'success',
                 title: 'Sauvegardé'

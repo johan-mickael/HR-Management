@@ -49,7 +49,8 @@ class PlanningController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('planning/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            // Find all users except the connected one
+            'users' => $userRepository->findAllOthersUsers($this->user->getId()),
         ]);
     }
 
@@ -129,6 +130,7 @@ class PlanningController extends AbstractController
     #[Route('/share', name: 'share', methods: ['POST'])]
     public function share(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
+        dd($request->request->all());
         $planning = $entityManager->getRepository(Planning::class)->find($request->request->get('planningId'));
         $usersID = $request->request->all('users');
         foreach($usersID as $userID) {
