@@ -130,7 +130,6 @@ class PlanningController extends AbstractController
     #[Route('/share', name: 'share', methods: ['POST'])]
     public function share(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository): Response
     {
-        dd($request->request->all());
         $planning = $entityManager->getRepository(Planning::class)->find($request->request->get('planningId'));
         $usersID = $request->request->all('users');
         foreach($usersID as $userID) {

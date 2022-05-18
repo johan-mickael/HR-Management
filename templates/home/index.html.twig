@@ -11,7 +11,7 @@ Dashboard
 
 		<div class="small-box bg-info">
 			<div class="inner">
-				<h3>150</h3>
+				<h3>{{dashboard.nbEmployee}}</h3>
 				<p>Employés</p>
 			</div>
 			<div class="icon">
@@ -25,7 +25,7 @@ Dashboard
 	<div class="col-lg-3 col-6">
 		<div class="small-box bg-warning">
 			<div class="inner">
-				<h3>€2500</h3>
+				<h3>€{{dashboard.salaryAvg | number_format(2, ',', '.')}}</h3>
 				<p>Salaire moyen</p>
 			</div>
 			<div class="icon">
@@ -40,7 +40,7 @@ Dashboard
 
 		<div class="small-box bg-success">
 			<div class="inner">
-				<h3>4</h3>
+				<h3>{{dashboard.nbDepartment}}</h3>
 				<p>Départements</p>
 			</div>
 			<div class="icon">
@@ -55,7 +55,7 @@ Dashboard
 
 		<div class="small-box bg-danger">
 			<div class="inner">
-				<h3>5</h3>
+				<h3>{{dashboard.nbCustomer}}</h3>
 				<p>Clients</p>
 			</div>
 			<div class="icon">
@@ -65,8 +65,7 @@ Dashboard
 					class="fas fa-arrow-circle-right"></i></a>
 		</div>
 	</div>
-
-
-
 </div>
+<hr>
+{{include('home/timeline.html.twig')}}
 {% endblock %}
